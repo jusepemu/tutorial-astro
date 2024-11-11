@@ -1,0 +1,27 @@
+---
+import Hamburguer from "./Hamburguer.astro";
+---
+
+<header class="mb-4">
+    <nav class="w-full">
+        <ul class="md:flex hidden gap-4 md:flex-row absolute h-full text-center md:text-left bg-white md:m-0 top-0 bottom-0 left-11 w-full md:static nav-links">
+            <li>
+                <a href="/">Inicio</a>
+            </li>
+            <li>
+                <a href="/about/">Sobre mi</a>
+            </li>
+            <li>
+                <a href="/blog/">Blog</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<Hamburguer />
+
+<style>
+    .expanded {
+        display: grid;
+        align-items: center;
+    }
+</style>
