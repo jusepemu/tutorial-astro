@@ -1,9 +1,5 @@
 ---
-import Footer from '../components/Footer.astro';
-import Navigation from '../components/Navigation.astro';
-import '../styles/global.css'
-
-const pageTitle = "Sobre mi";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const identity = {
     firstName: "Sebastian",
@@ -27,51 +23,34 @@ const happy = true;
 const color = 'navy'
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-        <style define:vars={{ color }}>
-            h1 {
-                color: var(--color);
-            }
-        </style>
-    </head>
-    <body>
-        <Navigation />
-        <h1>{pageTitle}</h1>
-        <h2>... ¡y mi nuevo sitio Astro!</h2>
+<BaseLayout pageTitle="About">
+    <h2>... ¡y mi nuevo sitio Astro!</h2>
 
-        <p>He aquí algunos datos sobre mí:</p>
-        <ul>
-            <li>Me llamo {identity.firstName}.</li>
-            <li>
-                Vivo en {identity.country} y trabajo como {identity.occupation}.
-            </li>
-            {
-                identity.hobbies.length >= 2 && (
-                    <li>
-                        Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
-                        {identity.hobbies[1]}
-                    </li>
-                )
-            }
-        </ul>
-        <p>Mis habilidades son:</p>
-        <ul>
-            {skills.map((skill) => <li>{skill}</li>)}
-        </ul>
-        <section>
-            {
-                happy && <p class="font-medium">Estoy feliz de aprender astro</p>
-            }
-            {
+    <p>He aquí algunos datos sobre mí:</p>
+    <ul>
+        <li>Me llamo {identity.firstName}.</li>
+        <li>
+            Vivo en {identity.country} y trabajo como {identity.occupation}.
+        </li>
+        {
+            identity.hobbies.length >= 2 && (
+                <li>
+                    Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
+                    {identity.hobbies[1]}
+                </li>
+            )
+        }
+    </ul>
+    <p>Mis habilidades son:</p>
+    <ul>
+        {skills.map((skill) => <li>{skill}</li>)}
+    </ul>
+    <section>
+        {
+            happy && <p class="font-medium">Estoy feliz de aprender astro</p>
+        }
+        {
 
-            }
-        </section>
-		<Footer />
-    </body>
-</html>
+        }
+    </section>
+</BaseLayout>

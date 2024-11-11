@@ -1,26 +1,11 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navigation from "../components/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 
 ---
 
-<html lang="en" class="h-full">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body class="flex flex-col h-dvh max-w-screen-lg mx-auto relative sm:p-4">
-		<Navigation />
-		<section class="flex-1 px-11 md:px-0">
-			<h1>Mi sitio astro</h1>
-		</section>
-		<Footer />
-		<script>
-			import "../scripts/menu.ts";
-		</script>
-	</body>
-</html>
+<BaseLayout pageTitle="Home">
+	<h2>Mi primer pagina en Astro 🚀</h2>
+</BaseLayout>
