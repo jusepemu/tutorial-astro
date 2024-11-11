@@ -1,37 +1,77 @@
 ---
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+import '../styles/global.css'
 
+const pageTitle = "Sobre mi";
+
+const identity = {
+    firstName: "Sebastian",
+    country: "Colombia",
+    occupation: "Developer",
+    hobbies: ["fotografia", "Jugar videojuegos", "Ejercicio"],
+};
+
+const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Vue",
+    "Astro",
+    "Redacción de documentos",
+    "Backend",
+];
+
+const happy = true;
+const color = 'navy'
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
-	</head>
-	<body>
-        <header class="mb-4">
-            <nav class="w-full">
-                <ul class="flex gap-4">
-					<li>
-						<a href="/">Inicio</a>
-					</li>
-                    <li>
-                        <a href="/about/">Sobre mi</a>
-                    </li>
-					<li>
-                        <a href="/blog/">Blog</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <h1>Mi sitio Astro</h1>
-        <h1>Sobre mi</h1>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+        <style define:vars={{ color }}>
+            h1 {
+                color: var(--color);
+            }
+        </style>
+    </head>
+    <body>
+        <Navigation />
+        <h1>{pageTitle}</h1>
         <h2>... ¡y mi nuevo sitio Astro!</h2>
-          
-        <p>Estoy trabajando en el tutorial introductorio de Astro. Esta es la segunda página de mi sitio web, ¡y es la primera que he construido yo mismo!</p>
-          
-        <p>Este sitio se irá actualizando a medida que vaya completando más partes del tutorial, ¡así que no dejes de visitarlo para ver cómo va mi viaje!</p>
-	</body>
+
+        <p>He aquí algunos datos sobre mí:</p>
+        <ul>
+            <li>Me llamo {identity.firstName}.</li>
+            <li>
+                Vivo en {identity.country} y trabajo como {identity.occupation}.
+            </li>
+            {
+                identity.hobbies.length >= 2 && (
+                    <li>
+                        Dos de mis aficiones son: {identity.hobbies[0]} y{" "}
+                        {identity.hobbies[1]}
+                    </li>
+                )
+            }
+        </ul>
+        <p>Mis habilidades son:</p>
+        <ul>
+            {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+        <section>
+            {
+                happy && <p class="font-medium">Estoy feliz de aprender astro</p>
+            }
+            {
+
+            }
+        </section>
+		<Footer />
+    </body>
 </html>
