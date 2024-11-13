@@ -1,0 +1,24 @@
+---
+const { frontmatter } = Astro.props
+---
+
+<section class="container mx-auto">
+    <figure class="block h-[200px] my-5">
+        <img src={frontmatter.image.url} class="w-full h-full object-cover" alt={frontmatter.image.alt} />
+    </figure>
+    <header class="my-5">
+        <h1 class="text-3xl mb-2 font-semibold">{frontmatter.title}</h1>
+        <div>
+            <small class="block font-semibold">{frontmatter.author}</small>
+            <small class="block font-semibold">{frontmatter.pubDate}</small>
+        </div>
+        <div class="flex gap-2">
+            {
+                frontmatter.tags.map((tag: string) => (
+                    <small class="font-medium">#{tag}</small>
+                ))
+            }
+        </div>
+    </header>
+    <slot />
+</section>
