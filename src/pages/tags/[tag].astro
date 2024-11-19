@@ -1,0 +1,37 @@
+---
+import type { GetStaticPaths, MarkdownInstance } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+
+export const getStaticPaths = (async () => {
+    const posts: MarkdownInstance<Record<string, any>>[] =
+        await Astro.glob("../posts/*.md");
+    const tags = [
+        ...new Set(posts.map((p) => p.frontmatter.tags).flat() as string[]),
+    ];
+
+    return tags.map((tag: string) => {
+        const filteredPosts: MarkdownInstance<Record<string, any>>[] =
+            posts.filter((p) => p.frontmatter.tags.includes(tag));
+            
+        return {
+            params: { tag },
+            props: { posts: filteredPosts },
+        };
+    });
+}) satisfies GetStaticPaths;
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+    <p class="mb-5">Entradas etiquetadas con <strong>{tag}</strong>:</p>
+    <section class="pb-5 flex flex-col gap-4">
+        {
+            posts.map((post) => (
+                <BlogPost url={post.url ?? ""} title={post.frontmatter.title} />
+            ))
+        }
+    </section>
+</BaseLayout>
