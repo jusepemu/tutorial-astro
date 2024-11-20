@@ -21,7 +21,7 @@ const { frontmatter } = Astro.props;
         <div class="flex gap-2">
             {
                 frontmatter.tags.map((tag: string) => (
-                    <small class="font-medium">#{tag}</small>
+                    <a class="font-medium" href={`/tags/${tag} `}>#{tag}</a>
                 ))
             }
         </div>
