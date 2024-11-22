@@ -1,11 +1,9 @@
 ---
-import Footer from "../components/Footer.astro";
-import Navigation from "../components/Navigation.astro";
+import { Greeting } from "../components/Greeting";
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-
 ---
 
 <BaseLayout pageTitle="Home">
-	<h2>Mi primer pagina en Astro 🚀</h2>
+	<h2 class="mb-5">Mi primer pagina en Astro 🚀</h2>
+	<Greeting client:load messages={['Hola', 'Que tal!', "Bienvenido o Welcome!"]} />
 </BaseLayout>
