@@ -1,18 +1,19 @@
 ---
-import type { GetStaticPaths, MarkdownInstance } from "astro";
+import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogPost from "../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
 
 export const getStaticPaths = (async () => {
-    const posts: MarkdownInstance<Record<string, any>>[] =
-        await Astro.glob("../posts/*.md");
+    const posts =
+        await getCollection("posts")
     const tags = [
-        ...new Set(posts.map((p) => p.frontmatter.tags).flat() as string[]),
+        ...new Set(posts.map((p) => p.data.tags).flat() as string[]),
     ];
 
     return tags.map((tag: string) => {
-        const filteredPosts: MarkdownInstance<Record<string, any>>[] =
-            posts.filter((p) => p.frontmatter.tags.includes(tag));
+        const filteredPosts =
+            posts.filter((p) => p.data.tags.includes(tag));
             
         return {
             params: { tag },
@@ -30,7 +31,7 @@ const { posts } = Astro.props;
     <section class="pb-5 flex flex-col gap-4">
         {
             posts.map((post) => (
-                <BlogPost url={post.url ?? ""} title={post.frontmatter.title} />
+                <BlogPost url={`/posts/${post.slug}` ?? ""} title={post.data.title} />
             ))
         }
     </section>
